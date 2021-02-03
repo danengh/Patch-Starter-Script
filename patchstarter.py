@@ -124,7 +124,8 @@ def make_definition(args):
     info_plist_path = os.path.join(args.path, 'Contents', 'Info.plist')
 
     try:
-        info_plist = plistlib.readPlist(info_plist_path)
+        with open(info_plist_path, "rb") as info_plist_file:
+            info_plist = plistlib.load(info_plist_file)
     except EnvironmentError as err:
         print('ERROR: {}'.format(err))
         raise SystemExit(1)
